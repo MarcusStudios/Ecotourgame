@@ -1,0 +1,53 @@
+/* Estilo básico para a tela de fases */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e0f7fa; /* Azul claro suave */
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.menu {
+    margin-top: 50px;
+}
+
+.stage-buttons {
+    margin: 20px 0;
+}
+
+button {
+    background-color: #00796b; /* Verde água escuro */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #004d40; /* Verde água mais escuro */
+}
+
+.instructions {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff; /* Branco */
+    padding: 20px;
+    border: 1px solid #b2dfdb; /* Verde água claro */
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.instructions h2 {
+    margin-top: 0;
+    color: #00796b; /* Verde água escuro */
+}
