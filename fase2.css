@@ -22,7 +22,7 @@ body, html {
 
 #score-board {
     position: absolute;
-    top: 50px; /* Aumentado de 10px para 50px para mover um pouco para baixo */
+    top: 90px; /* Aumentado de 10px para 50px para mover um pouco para baixo */
     right: 20px;
     font-size: 24px;
     font-weight: bold;
