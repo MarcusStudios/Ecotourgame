@@ -1,6 +1,6 @@
 const trashTypes = [
     { type: 'metal', img: 'metal1.png', sound: new Audio('_sounds/effects/metal.wav') },
-    { type: 'plastic', img: 'plastico2.png', sound: new Audio('_sounds/effects/plastic.wav') },
+    { type: 'plastic', img: 'plastico1.png', sound: new Audio('_sounds/effects/plastic.wav') },
     { type: 'paper', img: 'papel1.png', sound: new Audio('_sounds/effects/paper.mp3') },
     { type: 'glass', img: 'vidro1.png', sound: new Audio('_sounds/effects/glassFLAC.flac') },
     { type: 'organic', img: 'organico1.png', sound: new Audio('_sounds/effects/organic.wav') }

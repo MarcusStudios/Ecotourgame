@@ -5,29 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo de Reciclagem</title>
-    <link rel="stylesheet" href="/kk/css/fase3.css">
+    <link rel="stylesheet" href="fase3.css">
     <link rel="shortcut icon"
-        href="/kk/imgs/png-transparent-recycling-symbol-paper-greening-environment-miscellaneous-angle-leaf.png"
+        href="png-transparent-recycling-symbol-paper-greening-environment-miscellaneous-angle-leaf.png"
         type="image/x-icon">
 </head>
 
 <body>
+    <div id="game-container">
+        <div id="score-board">
+            <p>Pontuação: <span id="score">0</span></p>
+        </div>
 
     <div id="bin-container">
         <div class="bin" data-type="organic">
-            <img src="/kk/lixeiras/lixeira4.png" alt="Lixeira Orgânico">
+            <img src="lixeira4.png" alt="Lixeira Orgânico">
         </div>
         <div class="bin" data-type="metal">
-            <img src="/kk/lixeiras/lixeira1.png" alt="Lixeira Metal">
+            <img src="lixeira1.png" alt="Lixeira Metal">
         </div>
         <div class="bin" data-type="paper">
-            <img src="/kk/lixeiras/lixeira2.png" alt="Lixeira Papel">
+            <img src="lixeira2.png" alt="Lixeira Papel">
         </div>
         <div class="bin" data-type="plastic">
-            <img src="/kk/lixeiras/lixeira3.png" alt="Lixeira Plástico">
+            <img src="lixeira3.png" alt="Lixeira Plástico">
         </div>
         <div class="bin" data-type="glass">
-            <img src="/kk/lixeiras/lixeira5.png" alt="Lixeira Vidro">
+            <img src="lixeira5.png" alt="Lixeira Vidro">
         </div>
     </div>
 
@@ -42,7 +46,7 @@
     <audio id="organic-sound" src="_sounds/effects/organic.wav"></audio>
     <audio id="background-sound" src="" loop></audio>
     <audio id="error-sound" src="_sounds/misplaced.mp3"></audio>
-    <script src="/kk/scripts/fase3.js"></script>
+    <script src="fase3.js"></script>
 </body>
 
 </html>
