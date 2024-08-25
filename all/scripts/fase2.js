@@ -1,9 +1,9 @@
 const trashTypes = [
-    { type: 'metal', img: '/lixos/metal/metal1.png', sound: new Audio('_sounds/effects/metal.wav') },
-    { type: 'plastic', img: '/lixos/plastico/plastico2.png', sound: new Audio('_sounds/effects/plastic.wav') },
-    { type: 'paper', img: '/lixos/papel/papel1.png', sound: new Audio('_sounds/effects/paper.mp3') },
-    { type: 'glass', img: '/lixos/vidro/vidro1.png', sound: new Audio('_sounds/effects/glassFLAC.flac') },
-    { type: 'organic', img: '/lixos/organico/organico1.png', sound: new Audio('_sounds/effects/organic.wav') }
+    { type: 'metal', img: '/all/lixos/metal/metal1.png', sound: new Audio('_sounds/effects/metal.wav') },
+    { type: 'plastic', img: '/all/lixos/plastico/plastico2.png', sound: new Audio('_sounds/effects/plastic.wav') },
+    { type: 'paper', img: '/all/lixos/papel/papel1.png', sound: new Audio('_sounds/effects/paper.mp3') },
+    { type: 'glass', img: '/all/lixos/vidro/vidro1.png', sound: new Audio('_sounds/effects/glassFLAC.flac') },
+    { type: 'organic', img: '/all/lixos/organico/organico1.png', sound: new Audio('_sounds/effects/organic.wav') }
 ];
 
 const trashContainer = document.getElementById('trash-container');
