@@ -15,7 +15,7 @@ let score = 0;
 // Função para criar lixos aleatórios
 function createRandomTrash() {
     // Número de lixos reduzido
-    const numberOfTrashes = 3;
+    const numberOfTrashes = 5;
 
     trashTypes.forEach(trashType => {
         for (let i = 0; i < numberOfTrashes; i++) {
