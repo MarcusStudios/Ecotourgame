@@ -225,19 +225,5 @@ body, html {
         border: 2px solid #fff;
         transition: border 0.3s ease;
     }
-    .music-button {
-      
-    }
-    
-    .music-button.muted {
-        
-    }
-    
-    .music-button:hover {
-      
-    }
-    
-    
-    
-    
+   
 }
