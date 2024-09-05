@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo de Reciclagem</title>
     <link rel="stylesheet" href="fase1.css">
-    <link rel="shortcut icon"
-        href="png-transparent-recycling-symbol-paper-greening-environment-miscellaneous-angle-leaf.png"
-        type="image/x-icon">
+    <link rel="shortcut icon" href="png-transparent-recycling-symbol-paper-greening-environment-miscellaneous-angle-leaf.png" type="image/x-icon">
 </head>
-
 <body>
-
     <div id="game-container">
         <div id="score-board">
             <p>Pontuação: <span id="score">0</span></p>
@@ -37,16 +32,18 @@
         <div id="trash-container">
             <!-- Lixos serão inseridos aqui dinamicamente -->
         </div>
+        <button id="toggle-music" class="music-button">🔊</button> <!-- Botão de música -->
     </div>
+
+    <!-- Sons para cada tipo de lixo -->
     <audio id="metal-sound" src="_sounds/effects/metal.wav"></audio>
     <audio id="plastic-sound" src="_sounds/effects/plastic.wav"></audio>
     <audio id="paper-sound" src="_sounds/effects/paper.mp3"></audio>
     <audio id="glass-sound" src="_sounds/effects/glassFLAC.flac"></audio>
     <audio id="organic-sound" src="_sounds/effects/organic.wav"></audio>
-    <audio id="background-sound" src="" loop></audio>
+    <audio id="background-sound" src="_sounds/musics/After_School_Jamboree.mp3" loop></audio>
     <audio id="error-sound" src="_sounds/misplaced.mp3"></audio>
+
     <script src="fase1.js"></script>
-
 </body>
-
 </html>

@@ -9,29 +9,48 @@ const trashTypes = [
 const trashContainer = document.getElementById('trash-container');
 const scoreElement = document.getElementById('score');
 const errorSound = new Audio('_sounds/misplaced.mp3');
-const backgroundSound = new Audio('_sounds/musics/After_School_Jamboree.mp3');
+const backgroundSound = document.getElementById('background-sound');
+const toggleMusicButton = document.getElementById('toggle-music');
 let score = 0;
 
-// Função para criar lixos aleatórios
-function createRandomTrash() {
-    // Número de lixos reduzido
-    const numberOfTrashes = 3;
+let isMuted = false;
 
+// Inicializa o som de fundo
+backgroundSound.loop = true;
+backgroundSound.volume = 0.5;
+
+// Toca o som de fundo ao carregar a página
+document.addEventListener("DOMContentLoaded", () => {
+    backgroundSound.play();
+});
+
+// Controla o som de fundo com o botão
+toggleMusicButton.addEventListener('click', () => {
+    isMuted = !isMuted;
+    if (isMuted) {
+        backgroundSound.pause();
+        toggleMusicButton.textContent = '🔇'; // Altere o ícone para indicar que a música está mutada
+        toggleMusicButton.classList.add('muted');
+    } else {
+        backgroundSound.play();
+        toggleMusicButton.textContent = '🔊'; // Altere o ícone para indicar que a música está ativada
+        toggleMusicButton.classList.remove('muted');
+    }
+});
+
+function createRandomTrash() {
+    const numberOfTrashes = 3;
     trashTypes.forEach(trashType => {
         for (let i = 0; i < numberOfTrashes; i++) {
             const trashElement = document.createElement('img');
             trashElement.src = trashType.img;
             trashElement.className = 'trash';
             trashElement.dataset.type = trashType.type;
-            trashElement.dataset.soundId = trashType.type;
 
-            // Posicionamento centralizado
             const centerX = window.innerWidth / 2;
             const centerY = window.innerHeight / 2;
-
-            // Posições aleatórias ao redor do centro
-            const offsetX = (Math.random() - 0.5) * 200; // Ajuste a distância ao redor do centro
-            const offsetY = (Math.random() - 0.5) * 200; // Ajuste a distância ao redor do centro
+            const offsetX = (Math.random() - 0.5) * 200;
+            const offsetY = (Math.random() - 0.5) * 200;
 
             trashElement.style.left = `${centerX + offsetX}px`;
             trashElement.style.top = `${centerY + offsetY}px`;
@@ -41,20 +60,16 @@ function createRandomTrash() {
             trashElement.addEventListener('touchstart', touchStart);
             trashElement.addEventListener('touchmove', touchMove);
             trashElement.addEventListener('touchend', touchEnd);
-
             trashElement.addEventListener('mousedown', mouseDown);
-            document.addEventListener('mousemove', mouseMove);
-            document.addEventListener('mouseup', mouseUp);
         }
     });
 }
 
-// Variáveis para armazenar informações de toque e mouse
 let draggedTrash = null;
 let offsetX, offsetY;
 
 function touchStart(e) {
-    e.preventDefault(); // Previne o comportamento padrão do toque
+    e.preventDefault();
     const touch = e.touches[0];
     draggedTrash = e.target;
     offsetX = touch.clientX - draggedTrash.getBoundingClientRect().left;
@@ -62,7 +77,7 @@ function touchStart(e) {
 }
 
 function touchMove(e) {
-    e.preventDefault(); // Previne o comportamento padrão do toque
+    e.preventDefault();
     if (!draggedTrash) return;
     const touch = e.touches[0];
     draggedTrash.style.left = `${touch.clientX - offsetX}px`;
@@ -76,10 +91,12 @@ function touchEnd(e) {
 }
 
 function mouseDown(e) {
-    e.preventDefault(); // Previne o comportamento padrão do clique
+    e.preventDefault();
     draggedTrash = e.target;
     offsetX = e.clientX - draggedTrash.getBoundingClientRect().left;
     offsetY = e.clientY - draggedTrash.getBoundingClientRect().top;
+    document.addEventListener('mousemove', mouseMove);
+    document.addEventListener('mouseup', mouseUp);
 }
 
 function mouseMove(e) {
@@ -92,6 +109,8 @@ function mouseUp(e) {
     if (!draggedTrash) return;
     checkDrop();
     draggedTrash = null;
+    document.removeEventListener('mousemove', mouseMove); // Remove o evento
+    document.removeEventListener('mouseup', mouseUp); // Remove o evento
 }
 
 function checkDrop() {
@@ -111,36 +130,74 @@ function checkDrop() {
             if (bin.dataset.type === draggedTrash.dataset.type) {
                 score += 10;
                 const sound = trashTypes.find(type => type.type === draggedTrash.dataset.type).sound;
-                sound.currentTime = 0; // Reinicia o som para garantir que toque do início
+                sound.currentTime = 0;
                 sound.play();
-                // Adiciona a animação de sucesso
                 draggedTrash.classList.add('success-animation');
-                showPointsChange(10, true); // Mostra a animação de pontos ganhos
+                showPointsChange(10, true);
             } else {
                 score -= 10;
-                errorSound.currentTime = 0; // Reinicia o som para garantir que toque do início
+                errorSound.currentTime = 0;
                 errorSound.play();
-                // Adiciona a animação de erro
                 draggedTrash.classList.add('error-animation');
-                showPointsChange(-10, false); // Mostra a animação de pontos perdidos
+                showPointsChange(-10, false);
             }
             droppedInBin = true;
-            setTimeout(() => draggedTrash.remove(), 500); // Remove o lixo após a animação
+            setTimeout(() => draggedTrash.remove(), 500);
         }
     });
 
-    // Atualiza a pontuação
     scoreElement.textContent = score;
+
+    if (document.querySelectorAll('.trash').length === 0) {
+        showLevelOptions();
+    }
 }
 
 function showPointsChange(amount, isGain) {
     const pointsChange = document.createElement('div');
     pointsChange.className = isGain ? 'points-gain' : 'points-loss';
     pointsChange.textContent = `${amount > 0 ? '+' : ''}${amount}`;
-    pointsChange.style.left = `${window.innerWidth / 2}px`; // Posiciona no centro horizontalmente
-    pointsChange.style.top = `${window.innerHeight / 2}px`; // Posiciona no centro verticalmente
+    pointsChange.style.left = `${window.innerWidth / 2}px`;
+    pointsChange.style.top = `${window.innerHeight / 2}px`;
     document.body.appendChild(pointsChange);
-    setTimeout(() => pointsChange.remove(), 1000); // Remove o elemento após 1 segundo
+    setTimeout(() => pointsChange.remove(), 1000);
+}
+
+function showLevelOptions() {
+    if (document.querySelector('.options-container')) return; // Evita múltiplos containers
+
+    const optionsContainer = document.createElement('div');
+    optionsContainer.className = 'options-container';
+
+    const restartButton = document.createElement('button');
+    restartButton.textContent = 'Reiniciar Fase';
+    restartButton.onclick = () => {
+        resetGame();
+    };
+    optionsContainer.appendChild(restartButton);
+
+    const nextButton = document.createElement('button');
+    nextButton.textContent = 'Próxima Fase';
+    nextButton.onclick = () => {
+        nextLevel();
+    };
+    optionsContainer.appendChild(nextButton);
+
+    document.body.appendChild(optionsContainer);
+}
+
+function resetGame() {
+    score = 0;
+    scoreElement.textContent = score;
+    trashContainer.innerHTML = '';
+    const optionsContainer = document.querySelector('.options-container');
+    if (optionsContainer) optionsContainer.remove();
+    createRandomTrash();
+}
+
+function nextLevel() {
+    // Adicione aqui a lógica para ir para a próxima fase
+    window.location.href = 'fase2.html'; // Exemplo de redirecionamento para a próxima fase (substitua com a lógica correta)
 }
 
 // Inicializa o jogo

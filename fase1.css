@@ -215,6 +215,29 @@ body, html {
     }
 
     .points-gain, .points-loss {
-        font-size: 14px;
+        border-radius: 5px;
+        padding: 5px 10px;
+        background-color: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
+    
+    .bin:hover {
+        border: 2px solid #fff;
+        transition: border 0.3s ease;
+    }
+    .music-button {
+      
+    }
+    
+    .music-button.muted {
+        
+    }
+    
+    .music-button:hover {
+      
+    }
+    
+    
+    
+    
 }
