@@ -17,7 +17,6 @@ const restartGameButton = document.getElementById('restartGame');
 const nextPhaseButton = document.getElementById('nextPhase');
 let score = 0;
 let trashCount = 0; // Contador de lixo
-
 let isMuted = false;
 
 // Inicializa o som de fundo
@@ -86,11 +85,23 @@ function touchMove(e) {
     e.preventDefault();
     if (!draggedTrash) return;
     const touch = e.touches[0];
-    draggedTrash.style.left = `${touch.clientX - offsetX}px`;
-    draggedTrash.style.top = `${touch.clientY - offsetY}px`;
+
+    // Calcula a nova posição
+    let newLeft = touch.clientX - offsetX;
+    let newTop = touch.clientY - offsetY;
+
+    // Mantém o lixo dentro dos limites da tela
+    const trashRect = draggedTrash.getBoundingClientRect();
+    if (newLeft < 0) newLeft = 0; // Limite esquerdo
+    if (newTop < 0) newTop = 0; // Limite superior
+    if (newLeft + trashRect.width > window.innerWidth) newLeft = window.innerWidth - trashRect.width; // Limite direito
+    if (newTop + trashRect.height > window.innerHeight) newTop = window.innerHeight - trashRect.height; // Limite inferior
+
+    draggedTrash.style.left = `${newLeft}px`;
+    draggedTrash.style.top = `${newTop}px`;
 }
 
-function touchEnd(e) {
+function touchEnd() {
     if (!draggedTrash) return;
     checkDrop();
     draggedTrash = null;
@@ -107,11 +118,23 @@ function mouseDown(e) {
 
 function mouseMove(e) {
     if (!draggedTrash) return;
-    draggedTrash.style.left = `${e.clientX - offsetX}px`;
-    draggedTrash.style.top = `${e.clientY - offsetY}px`;
+
+    // Calcula a nova posição
+    let newLeft = e.clientX - offsetX;
+    let newTop = e.clientY - offsetY;
+
+    // Mantém o lixo dentro dos limites da tela
+    const trashRect = draggedTrash.getBoundingClientRect();
+    if (newLeft < 0) newLeft = 0; // Limite esquerdo
+    if (newTop < 0) newTop = 0; // Limite superior
+    if (newLeft + trashRect.width > window.innerWidth) newLeft = window.innerWidth - trashRect.width; // Limite direito
+    if (newTop + trashRect.height > window.innerHeight) newTop = window.innerHeight - trashRect.height; // Limite inferior
+
+    draggedTrash.style.left = `${newLeft}px`;
+    draggedTrash.style.top = `${newTop}px`;
 }
 
-function mouseUp(e) {
+function mouseUp() {
     if (!draggedTrash) return;
     checkDrop();
     draggedTrash = null;
@@ -184,10 +207,10 @@ restartGameButton.addEventListener('click', () => {
 nextPhaseButton.addEventListener('click', () => {
     window.location.href = 'fase2.html'; // Vai para a próxima fase
 });
-document.getElementById('goToPhaseScreen').addEventListener('click', function() {
-    window.location.href = 'index.html'; // Substitua 'tela_de_fases.html' pelo nome correto da página de fases
-});
 
+document.getElementById('goToPhaseScreen').addEventListener('click', function() {
+    window.location.href = 'index.html'; // Vai para a tela de fases
+});
 
 function resetGame() {
     score = 0;
