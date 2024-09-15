@@ -33,11 +33,17 @@
             <!-- Lixos serão inseridos aqui dinamicamente -->
         </div>
 
-      
-        <button id="toggle-music" class="music-button" style="position: absolute; top: 50px; left: 10px;">🔊</button>
+        <!-- Modal Resultado -->
+        <div id="resultadoModal" class="modal">
+            <div class="modal-content">
+                <h2>Fim da Fase</h2>
+                <p>Sua pontuação foi: <span id="finalScore"></span></p>
+                <button id="restartGame">Reiniciar Fase</button>
+                <button id="nextPhase">Próxima Fase</button>
+            </div>
+        </div>
 
-
-       
+        <button id="toggle-music" class="music-button" style="position: absolute; top: 20px; left: 10px;">🔊</button>
     </div>
 
     <!-- Sons para cada tipo de lixo -->

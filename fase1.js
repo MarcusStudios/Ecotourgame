@@ -11,7 +11,12 @@ const scoreElement = document.getElementById('score');
 const errorSound = new Audio('_sounds/misplaced.mp3');
 const backgroundSound = document.getElementById('background-sound');
 const toggleMusicButton = document.getElementById('toggle-music');
+const resultadoModal = document.getElementById('resultadoModal');
+const finalScore = document.getElementById('finalScore');
+const restartGameButton = document.getElementById('restartGame');
+const nextPhaseButton = document.getElementById('nextPhase');
 let score = 0;
+let trashCount = 0; // Contador de lixo
 
 let isMuted = false;
 
@@ -29,11 +34,11 @@ toggleMusicButton.addEventListener('click', () => {
     isMuted = !isMuted;
     if (isMuted) {
         backgroundSound.pause();
-        toggleMusicButton.textContent = '🔇'; // Altere o ícone para indicar que a música está mutada
+        toggleMusicButton.textContent = '🔇';
         toggleMusicButton.classList.add('muted');
     } else {
         backgroundSound.play();
-        toggleMusicButton.textContent = '🔊'; // Altere o ícone para indicar que a música está ativada
+        toggleMusicButton.textContent = '🔊';
         toggleMusicButton.classList.remove('muted');
     }
 });
@@ -56,11 +61,12 @@ function createRandomTrash() {
             trashElement.style.top = `${centerY + offsetY}px`;
             trashContainer.appendChild(trashElement);
 
-            // Eventos de toque e mouse para arrastar
             trashElement.addEventListener('touchstart', touchStart);
             trashElement.addEventListener('touchmove', touchMove);
             trashElement.addEventListener('touchend', touchEnd);
             trashElement.addEventListener('mousedown', mouseDown);
+
+            trashCount++; // Incrementa o contador de lixo para cada item criado
         }
     });
 }
@@ -109,8 +115,8 @@ function mouseUp(e) {
     if (!draggedTrash) return;
     checkDrop();
     draggedTrash = null;
-    document.removeEventListener('mousemove', mouseMove); // Remove o evento
-    document.removeEventListener('mouseup', mouseUp); // Remove o evento
+    document.removeEventListener('mousemove', mouseMove);
+    document.removeEventListener('mouseup', mouseUp);
 }
 
 function checkDrop() {
@@ -142,14 +148,16 @@ function checkDrop() {
                 showPointsChange(-10, false);
             }
             droppedInBin = true;
+            trashCount--; // Diminui o contador de lixo ao descartar
             setTimeout(() => draggedTrash.remove(), 500);
         }
     });
 
     scoreElement.textContent = score;
 
-    if (document.querySelectorAll('.trash').length === 0) {
-        showLevelOptions();
+    // Verifica se todo o lixo foi descartado
+    if (trashCount === 0) {
+        openModal(); // Exibe o modal quando o jogo termina
     }
 }
 
@@ -163,41 +171,26 @@ function showPointsChange(amount, isGain) {
     setTimeout(() => pointsChange.remove(), 1000);
 }
 
-function showLevelOptions() {
-    if (document.querySelector('.options-container')) return; // Evita múltiplos containers
-
-    const optionsContainer = document.createElement('div');
-    optionsContainer.className = 'options-container';
-
-    const restartButton = document.createElement('button');
-    restartButton.textContent = 'Reiniciar Fase';
-    restartButton.onclick = () => {
-        resetGame();
-    };
-    optionsContainer.appendChild(restartButton);
-
-    const nextButton = document.createElement('button');
-    nextButton.textContent = 'Próxima Fase';
-    nextButton.onclick = () => {
-        nextLevel();
-    };
-    optionsContainer.appendChild(nextButton);
-
-    document.body.appendChild(optionsContainer);
+function openModal() {
+    finalScore.textContent = score; // Atualiza a pontuação final no modal
+    resultadoModal.style.display = 'flex'; // Exibe o modal
 }
+
+restartGameButton.addEventListener('click', () => {
+    resultadoModal.style.display = 'none'; // Esconde o modal
+    resetGame(); // Reinicia o jogo
+});
+
+nextPhaseButton.addEventListener('click', () => {
+    window.location.href = 'fase2.html'; // Vai para a próxima fase
+});
 
 function resetGame() {
     score = 0;
     scoreElement.textContent = score;
+    trashCount = 0; // Reseta o contador de lixo
     trashContainer.innerHTML = '';
-    const optionsContainer = document.querySelector('.options-container');
-    if (optionsContainer) optionsContainer.remove();
     createRandomTrash();
-}
-
-function nextLevel() {
-    // Adicione aqui a lógica para ir para a próxima fase
-    window.location.href = 'fase2.html'; // Exemplo de redirecionamento para a próxima fase (substitua com a lógica correta)
 }
 
 // Inicializa o jogo

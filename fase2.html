@@ -38,6 +38,18 @@
     <div id="trash-container">
         <!-- Lixos serão inseridos aqui dinamicamente -->
     </div>
+
+    <!-- Modal Resultado -->
+    <div id="resultadoModal" class="modal">
+        <div class="modal-content">
+            <h2>Fim da Fase</h2>
+            <p>Sua pontuação foi: <span id="finalScore"></span></p>
+            <button id="restartGame">Reiniciar Fase</button>
+            <button id="nextPhase">Próxima Fase</button>
+        </div>
+    </div>
+
+    <button id="toggle-music" class="music-button" style="position: absolute; top: 20px; left: 10px;">🔊</button>
     </div>
     <audio id="metal-sound" src="_sounds/effects/metal.wav"></audio>
     <audio id="plastic-sound" src="_sounds/effects/plastic.wav"></audio>
