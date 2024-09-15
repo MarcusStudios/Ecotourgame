@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jogo de Reciclagem</title>
+    <title>Jogo de Reciclagem - Fase 2</title>
     <link rel="stylesheet" href="fase2.css">
     <link rel="shortcut icon"
         href="png-transparent-recycling-symbol-paper-greening-environment-miscellaneous-angle-leaf.png"
@@ -17,47 +17,52 @@
             <p>Pontuação: <span id="score">0</span></p>
         </div>
 
-    <div id="bin-container">
-        <div class="bin" data-type="paper">
-            <img src="lixeira2.png" alt="Lixeira Papel">
+        <div id="bin-container">
+            <div class="bin" data-type="paper">
+                <img src="lixeira2.png" alt="Lixeira Papel">
+            </div>
+            <div class="bin" data-type="glass">
+                <img src="lixeira5.png" alt="Lixeira Vidro">
+            </div>
+            <div class="bin" data-type="organic">
+                <img src="lixeira4.png" alt="Lixeira Orgânico">
+            </div>
+            <div class="bin" data-type="plastic">
+                <img src="lixeira3.png" alt="Lixeira Plástico">
+            </div>
+            <div class="bin" data-type="metal">
+                <img src="lixeira1.png" alt="Lixeira Metal">
+            </div>
         </div>
-        <div class="bin" data-type="glass">
-            <img src="lixeira5.png" alt="Lixeira Vidro">
+
+        <div id="trash-container">
+            <!-- Lixos serão inseridos aqui dinamicamente -->
         </div>
-        <div class="bin" data-type="organic">
-            <img src="lixeira4.png" alt="Lixeira Orgânico">
+
+        <!-- Modal Resultado -->
+        <div id="resultadoModal" class="modal">
+            <div class="modal-content">
+                <h2>Fim da Fase</h2>
+                <p>Sua pontuação foi: <span id="finalScore"></span></p>
+                <button id="restartGame">Reiniciar Fase</button>
+                <button id="nextPhase">Próxima Fase</button>
+                <button id="goToPhaseScreen">Voltar à Tela de Fases</button>
+            </div>
         </div>
-        <div class="bin" data-type="plastic">
-            <img src="lixeira3.png" alt="Lixeira Plástico">
-        </div>
-        <div class="bin" data-type="metal">
-            <img src="lixeira1.png" alt="Lixeira Metal">
-        </div>
+
+        <button id="toggle-music" class="music-button" style="position: absolute; top: 20px; left: 10px;">🔊</button>
     </div>
 
-    <div id="trash-container">
-        <!-- Lixos serão inseridos aqui dinamicamente -->
-    </div>
-
-    <!-- Modal Resultado -->
-    <div id="resultadoModal" class="modal">
-        <div class="modal-content">
-            <h2>Fim da Fase</h2>
-            <p>Sua pontuação foi: <span id="finalScore"></span></p>
-            <button id="restartGame">Reiniciar Fase</button>
-            <button id="nextPhase">Próxima Fase</button>
-        </div>
-    </div>
-
-    <button id="toggle-music" class="music-button" style="position: absolute; top: 20px; left: 10px;">🔊</button>
-    </div>
+    <!-- Sons dos lixos e música de fundo -->
     <audio id="metal-sound" src="_sounds/effects/metal.wav"></audio>
     <audio id="plastic-sound" src="_sounds/effects/plastic.wav"></audio>
     <audio id="paper-sound" src="_sounds/effects/paper.mp3"></audio>
     <audio id="glass-sound" src="_sounds/effects/glassFLAC.flac"></audio>
     <audio id="organic-sound" src="_sounds/effects/organic.wav"></audio>
-    <audio id="background-sound" src="" loop></audio>
+    <audio id="background-sound" src="_sounds/musics/After_School_Jamboree.mp3" loop></audio>
     <audio id="error-sound" src="_sounds/misplaced.mp3"></audio>
+
+    <!-- Script JavaScript -->
     <script src="fase2.js"></script>
 </body>
 

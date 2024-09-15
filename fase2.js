@@ -184,6 +184,10 @@ restartGameButton.addEventListener('click', () => {
 nextPhaseButton.addEventListener('click', () => {
     window.location.href = 'fase2.html'; // Vai para a próxima fase
 });
+document.getElementById('goToPhaseScreen').addEventListener('click', function() {
+    window.location.href = 'index.html'; // Substitua 'tela_de_fases.html' pelo nome correto da página de fases
+});
+
 
 function resetGame() {
     score = 0;
