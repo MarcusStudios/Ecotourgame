@@ -8,7 +8,7 @@ const trashTypes = [
 
 const trashContainer = document.getElementById('trash-container');
 const scoreElement = document.getElementById('score');
-const errorSound = new Audio('_sounds/misplaced.mp3');
+const errorSound = new Audio('misplaced.mp3');
 const backgroundSound = document.getElementById('background-sound');
 const toggleMusicButton = document.getElementById('toggle-music');
 const resultadoModal = document.getElementById('resultadoModal');
@@ -79,6 +79,9 @@ function touchStart(e) {
     draggedTrash = e.target;
     offsetX = touch.clientX - draggedTrash.getBoundingClientRect().left;
     offsetY = touch.clientY - draggedTrash.getBoundingClientRect().top;
+
+    // Adiciona um estilo temporário para verificação
+    draggedTrash.style.border = '2px solid rgba(255, 0, 0, 0.5)';
 }
 
 function touchMove(e) {
@@ -92,10 +95,12 @@ function touchMove(e) {
 
     // Mantém o lixo dentro dos limites da tela
     const trashRect = draggedTrash.getBoundingClientRect();
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
     if (newLeft < 0) newLeft = 0; // Limite esquerdo
     if (newTop < 0) newTop = 0; // Limite superior
-    if (newLeft + trashRect.width > window.innerWidth) newLeft = window.innerWidth - trashRect.width; // Limite direito
-    if (newTop + trashRect.height > window.innerHeight) newTop = window.innerHeight - trashRect.height; // Limite inferior
+    if (newLeft + trashRect.width > windowWidth) newLeft = windowWidth - trashRect.width; // Limite direito
+    if (newTop + trashRect.height > windowHeight) newTop = windowHeight - trashRect.height; // Limite inferior
 
     draggedTrash.style.left = `${newLeft}px`;
     draggedTrash.style.top = `${newTop}px`;
@@ -103,6 +108,7 @@ function touchMove(e) {
 
 function touchEnd() {
     if (!draggedTrash) return;
+    draggedTrash.style.border = 'none'; // Remove o estilo temporário
     checkDrop();
     draggedTrash = null;
 }
@@ -114,6 +120,9 @@ function mouseDown(e) {
     offsetY = e.clientY - draggedTrash.getBoundingClientRect().top;
     document.addEventListener('mousemove', mouseMove);
     document.addEventListener('mouseup', mouseUp);
+
+    // Adiciona um estilo temporário para verificação
+    draggedTrash.style.border = '2px solid rgba(255, 0, 0, 0.5)';
 }
 
 function mouseMove(e) {
@@ -125,10 +134,12 @@ function mouseMove(e) {
 
     // Mantém o lixo dentro dos limites da tela
     const trashRect = draggedTrash.getBoundingClientRect();
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
     if (newLeft < 0) newLeft = 0; // Limite esquerdo
     if (newTop < 0) newTop = 0; // Limite superior
-    if (newLeft + trashRect.width > window.innerWidth) newLeft = window.innerWidth - trashRect.width; // Limite direito
-    if (newTop + trashRect.height > window.innerHeight) newTop = window.innerHeight - trashRect.height; // Limite inferior
+    if (newLeft + trashRect.width > windowWidth) newLeft = windowWidth - trashRect.width; // Limite direito
+    if (newTop + trashRect.height > windowHeight) newTop = windowHeight - trashRect.height; // Limite inferior
 
     draggedTrash.style.left = `${newLeft}px`;
     draggedTrash.style.top = `${newTop}px`;
@@ -136,6 +147,7 @@ function mouseMove(e) {
 
 function mouseUp() {
     if (!draggedTrash) return;
+    draggedTrash.style.border = 'none'; // Remove o estilo temporário
     checkDrop();
     draggedTrash = null;
     document.removeEventListener('mousemove', mouseMove);

@@ -8,7 +8,7 @@ const trashTypes = [
 
 const trashContainer = document.getElementById('trash-container');
 const scoreElement = document.getElementById('score');
-const errorSound = new Audio('_sounds/misplaced.mp3');
+const errorSound = new Audio('misplaced.mp3');
 const backgroundSound = document.getElementById('background-sound');
 const toggleMusicButton = document.getElementById('toggle-music');
 const resultadoModal = document.getElementById('resultadoModal');
