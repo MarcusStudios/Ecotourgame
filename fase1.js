@@ -1,9 +1,9 @@
 const trashTypes = [
-    { type: 'metal', img: 'metal1.png', sound: new Audio('_sounds/effects/metal.wav') },
-    { type: 'plastic', img: 'plastico1.png', sound: new Audio('_sounds/effects/plastic.wav') },
-    { type: 'paper', img: 'papel1.png', sound: new Audio('_sounds/effects/paper.mp3') },
-    { type: 'glass', img: 'vidro1.png', sound: new Audio('_sounds/effects/glassFLAC.flac') },
-    { type: 'organic', img: 'organico1.png', sound: new Audio('_sounds/effects/organic.wav') }
+    { type: 'metal', img: 'metal1.png', sound: new Audio('metal.wav') },
+    { type: 'plastic', img: 'plastico1.png', sound: new Audio('plastic.wav') },
+    { type: 'paper', img: 'papel1.png', sound: new Audio('paper.mp3') },
+    { type: 'glass', img: 'vidro1.png', sound: new Audio('glassFLAC.flac') },
+    { type: 'organic', img: 'organico1.png', sound: new Audio('organic.wav') }
 ];
 
 const trashContainer = document.getElementById('trash-container');
