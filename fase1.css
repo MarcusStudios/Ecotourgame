@@ -18,6 +18,7 @@ body, html {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 #score-board {
@@ -40,19 +41,21 @@ body, html {
     position: absolute;
     top: 10px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%);    
 }
 
 .bin {
     width: 100px;
     height: 100px;
     position: relative;
-    margin: 0 15px;
+    margin: 0 20px;
+   
 }
 
 .bin img {
     width: 100%;
     height: 100%;
+    
 }
 
 #trash-container {
