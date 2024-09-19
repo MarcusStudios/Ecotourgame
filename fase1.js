@@ -1,3 +1,4 @@
+console.log('Jogo de Reciclagem');
 const trashTypes = [
     { type: 'metal', img: 'metal1.png', sound: new Audio('metal.mp3') },
     { type: 'plastic', img: 'plastico1.png', sound: new Audio('plastic.mp3') },
@@ -21,11 +22,12 @@ let isMuted = false;
 
 // Inicializa o som de fundo
 backgroundSound.loop = true;
+
 backgroundSound.volume = 0.5;
 
 // Toca o som de fundo ao carregar a página
 document.addEventListener("DOMContentLoaded", () => {
-    backgroundSound.play();
+    // Não inicia a música automaticamente. Ela será iniciada após uma interação do usuário.
 });
 
 // Controla o som de fundo com o botão
@@ -36,7 +38,9 @@ toggleMusicButton.addEventListener('click', () => {
         toggleMusicButton.textContent = '🔇';
         toggleMusicButton.classList.add('muted');
     } else {
-        backgroundSound.play();
+        backgroundSound.play().catch(error => {
+            console.log('Erro ao reproduzir o som de fundo:', error);
+        });
         toggleMusicButton.textContent = '🔊';
         toggleMusicButton.classList.remove('muted');
     }
@@ -74,7 +78,9 @@ let draggedTrash = null;
 let offsetX, offsetY;
 
 function touchStart(e) {
-    e.preventDefault();
+    if (e.cancelable) {
+        e.preventDefault(); // Somente previne o comportamento se o evento for cancelável
+    }
     const touch = e.touches[0];
     draggedTrash = e.target;
     offsetX = touch.clientX - draggedTrash.getBoundingClientRect().left;
@@ -83,6 +89,7 @@ function touchStart(e) {
     // Adiciona um estilo temporário para verificação
     draggedTrash.style.border = '2px solid rgba(255, 0, 0, 0.5)';
 }
+
 
 function touchMove(e) {
     e.preventDefault();
@@ -97,14 +104,29 @@ function touchMove(e) {
     const trashRect = draggedTrash.getBoundingClientRect();
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
+
+    // Adiciona logs para depuração
+    console.log('newLeft:', newLeft, 'newTop:', newTop);
+    console.log('trashRect:', trashRect);
+    console.log('windowWidth:', windowWidth, 'windowHeight:', windowHeight);
+
+    // Ajusta os limites
     if (newLeft < 0) newLeft = 0; // Limite esquerdo
     if (newTop < 0) newTop = 0; // Limite superior
     if (newLeft + trashRect.width > windowWidth) newLeft = windowWidth - trashRect.width; // Limite direito
     if (newTop + trashRect.height > windowHeight) newTop = windowHeight - trashRect.height; // Limite inferior
 
+    // Atualiza a posição do lixo
     draggedTrash.style.left = `${newLeft}px`;
     draggedTrash.style.top = `${newTop}px`;
+
+    // Adiciona logs para verificar os ajustes
+    console.log('Adjusted newLeft:', newLeft, 'Adjusted newTop:', newTop);
 }
+
+
+
+
 
 function touchEnd() {
     if (!draggedTrash) return;
@@ -184,7 +206,11 @@ function checkDrop() {
             }
             droppedInBin = true;
             trashCount--; // Diminui o contador de lixo ao descartar
-            setTimeout(() => draggedTrash.remove(), 500);
+            setTimeout(() => {
+                if (draggedTrash && draggedTrash.parentNode) {
+                    draggedTrash.remove();
+                }
+            }, 500);
         }
     });
 
