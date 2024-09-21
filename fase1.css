@@ -21,13 +21,12 @@ body, html {
     position: absolute;
     top: 110px;
     right: 7px;
-
     font-size: 24px;
     font-weight: bold;
     color: #fff;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 5px; 
-    border-radius: 10px;      /* Fundo semi-transparente */
+    border-radius: 10px; /* Fundo semi-transparente */
 }
 
 #bin-container {
@@ -38,7 +37,6 @@ body, html {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    background-color: rgba(255, 255, 255, 0.8);
     padding: 10px;
 }
 
@@ -52,20 +50,18 @@ body, html {
 .bin img {
     width: 100%;
     height: 100%;
-    background-color: #4CAF50;
     border-radius: 10px;
 }
 
-
-
 #trash-container {
     position: relative;
-    width: 100%;
-    height: calc(100% - 120px);
+    width: 30%;
+    height: calc(100% - 100px); /* Mantém a altura, mas com espaço inferior ajustado */
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
     justify-content: center;
+    padding-top: 0; /* Remove qualquer espaçamento acima */
 }
 
 /* Ajuste do tamanho do lixo */
@@ -73,8 +69,8 @@ body, html {
     position: absolute;
     width: 80px;
     height: 80px;
+    top: -20px; /* Posiciona os itens mais para cima */
     border-radius: 10px;
-    background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-out, opacity 0.3s ease-out;
     z-index: 1;
@@ -237,6 +233,67 @@ body, html {
     }
 }
 
+/* Responsividade com Orientação */
+
+/* Modo Paisagem (Landscape) */
+@media (orientation: landscape) {
+    body, html {
+        flex-direction: row; /* Alinha os elementos na horizontal */
+    }
+
+    #bin-container {
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    #trash-container {
+        width: 50%;
+        height: calc(100% - 100px);
+    }
+    
+    .trash {
+        width: 80px; 
+        height: 80px; 
+    }
+    
+    .bin {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+/* Modo Retrato (Portrait) */
+@media (orientation: portrait) {
+    body, html {
+        flex-direction: column; /* Alinha os elementos na vertical */
+        justify-content: flex-start; /* Alinha no topo */
+    }
+
+    #bin-container {
+        flex-direction: row;
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    #trash-container {
+        width: 100%;
+        height: 60%; /* Aumenta o espaço vertical para os itens de lixo */
+    }
+
+    .trash {
+        width: 60px;
+        height: 60px;
+    }
+
+    .bin {
+        width: 80px;
+        height: 80px;
+    }
+}
+
 /* Estilo básico para o modal */
 .modal {
     display: none;
@@ -249,7 +306,6 @@ body, html {
     background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
-
 }
 
 .modal-content {
@@ -263,7 +319,6 @@ body, html {
     margin-top: 0;
     font-size: 30px;
     font-weight: bold;
-
 }
 
 .modal-content p {

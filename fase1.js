@@ -27,7 +27,7 @@ backgroundSound.volume = 0.5;
 
 // Toca o som de fundo ao carregar a página
 document.addEventListener("DOMContentLoaded", () => {
-    // Não inicia a música automaticamente. Ela será iniciada após uma interação do usuário.
+    backgroundSound.play();
 });
 
 // Controla o som de fundo com o botão
@@ -47,7 +47,7 @@ toggleMusicButton.addEventListener('click', () => {
 });
 
 function createRandomTrash() {
-    const numberOfTrashes = 3;
+    const numberOfTrashes = 2;
     trashTypes.forEach(trashType => {
         for (let i = 0; i < numberOfTrashes; i++) {
             const trashElement = document.createElement('img');
@@ -56,7 +56,8 @@ function createRandomTrash() {
             trashElement.dataset.type = trashType.type;
 
             const centerX = window.innerWidth / 2;
-            const centerY = window.innerHeight / 2;
+            const centerY = window.innerHeight / 4; // Muda o lixo para aparecer mais próximo do topo da tela
+
             const offsetX = (Math.random() - 0.5) * 200;
             const offsetY = (Math.random() - 0.5) * 200;
 
@@ -105,11 +106,6 @@ function touchMove(e) {
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
 
-    // Adiciona logs para depuração
-    console.log('newLeft:', newLeft, 'newTop:', newTop);
-    console.log('trashRect:', trashRect);
-    console.log('windowWidth:', windowWidth, 'windowHeight:', windowHeight);
-
     // Ajusta os limites
     if (newLeft < 0) newLeft = 0; // Limite esquerdo
     if (newTop < 0) newTop = 0; // Limite superior
@@ -119,9 +115,6 @@ function touchMove(e) {
     // Atualiza a posição do lixo
     draggedTrash.style.left = `${newLeft}px`;
     draggedTrash.style.top = `${newTop}px`;
-
-    // Adiciona logs para verificar os ajustes
-    console.log('Adjusted newLeft:', newLeft, 'Adjusted newTop:', newTop);
 }
 
 
