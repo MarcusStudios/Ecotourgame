@@ -1,4 +1,3 @@
-console.log('Jogo de Reciclagem');
 const trashTypes = [
     { type: 'metal', img: 'metal1.png', sound: new Audio('metal.mp3') },
     { type: 'plastic', img: 'plastico1.png', sound: new Audio('plastic.mp3') },
