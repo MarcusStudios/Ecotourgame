@@ -1,14 +1,14 @@
 const trashTypes = [
-    { type: 'metal', img: 'metal1.png', sound: new Audio('metal.mp3') },
-    { type: 'plastic', img: 'plastico1.png', sound: new Audio('plastic.mp3') },
-    { type: 'paper', img: 'papel1.png', sound: new Audio('paper.mp3') },
-    { type: 'glass', img: 'vidro1.png', sound: new Audio('glassFLAC.mp3') },
-    { type: 'organic', img: 'organico1.png', sound: new Audio('organic.mp3') }
+    { type: 'metal', img: '../lixos/metal/metal1.png', sound: new Audio('../metal.mp3') },
+    { type: 'plastic', img: '../lixos/plastico/plastico1.png', sound: new Audio('../plastic.mp3') },
+    { type: 'paper', img: '../lixos/papel/papel1.png', sound: new Audio('../paper.mp3') },
+    { type: 'glass', img: '../lixos/vidro/vidro1.png', sound: new Audio('../glassFLAC.mp3') },
+    { type: 'organic', img: '../lixos/organico/organico1.png', sound: new Audio('../organic.mp3') }
 ];
 
 const trashContainer = document.getElementById('trash-container');
 const scoreElement = document.getElementById('score');
-const errorSound = new Audio('misplaced.mp3');
+const errorSound = new Audio('../sons/misplaced.mp3');
 const backgroundSound = document.getElementById('background-sound');
 const toggleMusicButton = document.getElementById('toggle-music');
 const resultadoModal = document.getElementById('resultadoModal');
